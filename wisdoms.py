@@ -54,28 +54,14 @@ class MainScreen(Screen):
         writer = csv.writer(open('wisdoms.txt','w'),delimiter ='|')
 	writer.writerows(wisdoms_list)
 
-
-        # load sheet with wisdoms
-#        book = xlrd.open_workbook("wisdoms.xlsx")
-#        sheet1 = book.sheet_by_index(0)
-#        implemented_number = sheet1.cell(wisdom_number,1).value
-#        implemented_number +=1
-#        work_book = copy(book)
-#        work_sheet = work_book.get_sheet(0)
-#        work_sheet.write(wisdom_number,1,implemented_number)
-#        work_book.save('wisdoms.xlsx')
 	
     def callback_update_BAD(self):
-        # load sheet with wisdoms
-        book = xlrd.open_workbook("wisdoms.xlsx")
-        sheet1 = book.sheet_by_index(0)
-        try_number = sheet1.cell(wisdom_number,2).value
-        try_number +=1
-        work_book = copy(book)
-        work_sheet = work_book.get_sheet(0)
-        work_sheet.write(wisdom_number,2,try_number)
-        work_book.save('wisdoms.xlsx')
-
+        wisdoms_list = open('wisdoms.txt','r')
+        wisdoms_list = list(csv.reader(wisdoms_list,delimiter='|'))
+        wisdoms_list[wisdom_number][2] = int(wisdoms_list[wisdom_number][2]) + 1
+        writer = csv.writer(open('wisdoms.txt','w'),delimiter ='|')
+        writer.writerows(wisdoms_list)
+	
 
 class SettingsScreen(Screen):
     pass
