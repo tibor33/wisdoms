@@ -3,10 +3,6 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 from random import randint
-# to use excel
-import xlrd
-# to edit excel
-from xlutils.copy import copy
 # need for using handles to labels
 from kivy.properties import ObjectProperty, StringProperty
 
@@ -37,16 +33,6 @@ class MainScreen(Screen):
         wisdom_cell = wisdoms_list[wisdom_number][0]
 	self.wisdom_text_id = wisdom_cell	
 
-        
-        # load sheet with wisdoms
-#        book = xlrd.open_workbook("wisdoms.xlsx")
-#        sheet1 = book.sheet_by_index(0)
-#        wisdom_number = randint(0,sheet1.nrows-1)
-#        global wisdom_number
-#        wisdom_cell = sheet1.cell(wisdom_number,0)
-#        wisdom_label = wisdom_cell.value
-#        self.wisdom_text_id = wisdom_cell.value
-
     def callback_update_GOOD(self):
 	wisdoms_list = open('wisdoms.txt','r')
         wisdoms_list = list(csv.reader(wisdoms_list,delimiter='|'))
@@ -72,8 +58,8 @@ class ImplementedScreen(Screen):
     good_text_id = StringProperty()
     good_text_id = 'List of most implemented wisdoms:' + '\n'
     implemented_list = open('wisdoms.txt','r')
-    implemented_list = csv.reader(implemented_list,delimiter='|')
-    sort = sorted(implemented_list,key=operator.itemgetter(1))
+    implemented_list = list(csv.reader(implemented_list,delimiter='|'))
+    sort = sorted(implemented_list,key=operator.itemgetter(1),reverse=True)
     for eachline in sort:
 	good_text_line = eachline[:][0]
         good_text_id = good_text_id +'\n' + unichr(183)+ ' '  + good_text_line + '\n'
@@ -83,8 +69,8 @@ class Will_tryScreen(Screen):
     bad_text_id = StringProperty()
     bad_text_id = 'List of least implemented wisdoms:' + '\n'
     will_try_list = open('wisdoms.txt','r')
-    will_try_list = csv.reader(will_try_list,delimiter='|')
-    sort = sorted(will_try_list,key=operator.itemgetter(2))
+    will_try_list = list(csv.reader(will_try_list,delimiter='|'))
+    sort = sorted(will_try_list,key=operator.itemgetter(2),reverse=True)
     for eachline in sort:
         bad_text_line = eachline[:][0]
         bad_text_id = bad_text_id +'\n' + unichr(183)+ ' '  + bad_text_line + '\n'
