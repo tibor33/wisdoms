@@ -42,6 +42,13 @@
             size_hint: (1, 0.2)
             on_press: root.manager.current = 'menu'
 
+        Button:
+            text: 'Add wisdom'
+            size_hint: (1, 0.2)
+            on_press: root.callback_add_wisdom()
+
+
+
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
